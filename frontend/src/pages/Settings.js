@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet';
 
 function Settings() {
 
+  // Update and Delete account here
+
   // variables 
   const navigate = useNavigate();
 
