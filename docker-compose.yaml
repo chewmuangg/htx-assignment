@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+  
+  backend:
+    build: ./backend
+    ports:
+      - "5555:5555"
+    environment:
+      - PORT=5555
+      - MONGO_URI=mongodb+srv://chew:qUVHZLSoyF6lEXQp@audio-file-hosting.zd1bfcl.mongodb.net/?retryWrites=true&w=majority&appName=audio-file-hosting
+    depends_on:
+      - frontend
