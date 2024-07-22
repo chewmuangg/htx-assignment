@@ -1,0 +1,50 @@
+# Node.js modules
+node_modules/
+
+# Build output for Node.js and React
+/dist
+/build
+
+# Docker files
+docker-compose.override.yml
+docker-compose.local.yml
+Dockerfile
+Dockerfile.dev
+Dockerfile.prod
+.docker
+
+# Docker Compose specific
+docker-compose.override.yml
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# Dependency directories (might be added automatically by some tooling)
+jspm_packages/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Yarn and npm lock files (optional, depending on your setup)
+yarn.lock
+package-lock.json
