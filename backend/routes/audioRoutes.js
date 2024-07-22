@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Route to upload an Audio file
-router.post('/', upload.single('audioFile'), async (req, res) => {
+router.post('/upload', upload.single('audioFile'), async (req, res) => {
     try {
         // create audio file upload
         const { title, author, description, tags, uploadedBy } = req.body;

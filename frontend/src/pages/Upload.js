@@ -79,7 +79,7 @@ function Upload() {
 
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('http://localhost:5555/api/audio', formData, {
+            const res = await axios.post('http://localhost:5555/api/audio/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': token,
