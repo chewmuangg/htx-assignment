@@ -5,6 +5,7 @@ import { faArrowUpFromBracket, faHome, faGear } from '@fortawesome/free-solid-sv
 import axios from "axios";
 import { Helmet } from 'react-helmet';
 import AudioPlayer from "../components/AudioPlayer";
+import Spinner from "../components/Spinner";
 
 function Dashboard() {
 
@@ -14,6 +15,51 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Check if user is logged in by checking for token
+    /*const token = localStorage.getItem('token');
+    if (!token) {
+      // Redirect back to landing page (log in page)
+      navigate('/');
+    }*/
+
+    // Retrieve token from local storage
+    const token = localStorage.getItem('token');
+
+    // Retrieve username from local storage
+    const storedUsername = localStorage.getItem('username');
+    setUsername(storedUsername);
+
+    // Retrieve audio files list uploaded by user from database
+    if (storedUsername) {
+      const fetchAudioFiles = async () => {
+        try {
+          const res = await axios.get(`http://localhost:5555/api/audio/${storedUsername}`, {
+            headers: {
+              'Authorization': token,
+            }
+          });
+
+          const fetchedAudioFiles = res.data.data;
+          setAudioFiles(fetchedAudioFiles);
+
+        } catch (error) {
+          console.log(error);
+          setLoading(false);
+
+        } finally {
+          setLoading(false);
+        }
+
+      };
+
+      fetchAudioFiles();
+    } else {
+      setLoading(false);
+    }
+
+  }, [navigate]);
+  
   const handleUpload = () => {
     // navigate to upload page
     navigate('/upload');
@@ -26,47 +72,7 @@ function Dashboard() {
 
     // redirect back to landing page
     navigate('/');
-  }
-
-  useEffect(() => {
-    // Check if user is logged in by checking for token
-    /*const token = localStorage.getItem('token');
-    if (!token) {
-      // Redirect back to landing page (log in page)
-      navigate('/');
-    }*/
-
-    setLoading(true);
-
-    // Retrieve token from local storage
-    const token = localStorage.getItem('token');
-
-    // Retrieve username from local storage
-    const storedUsername = localStorage.getItem('username');
-    setUsername(storedUsername);
-
-    // Retrieve audio files list uploaded by user from database
-    const fetchAudioFiles = async () => {
-      try {
-        const res = await axios.get(`http://localhost:5555/api/audio/${username}`, {
-          headers: {
-            'Authorization': token,
-          }
-        });
-
-        const fetchedAudioFiles = res.data.data;
-        setAudioFiles(fetchedAudioFiles);
-        setLoading(false);
-
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-
-    fetchAudioFiles();
-
-  }, [navigate, username]);
+  };
 
   // function to delete audio from db
   const handleDelete = async (id) => {

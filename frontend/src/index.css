@@ -43,6 +43,14 @@ body {
   font-weight: bold;
 }
 
+/* loading page */
+.loading-container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
 /* landing page */
 .landing-container {
   display: flex;
